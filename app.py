@@ -157,7 +157,7 @@ def balloon_history():
 
 
         except Exception as e:
-            print(f"Error fetching or processing {url}: {e}")
+            print(f"Error fetching {url}: {e}")
             continue
 
 
