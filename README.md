@@ -39,9 +39,8 @@ Balloon data is fetched from `https://a.windbornesystems.com/treasure/`. The API
 - **OpenWeatherMap API** (Weather Overlay)
 - **Leaflet.heat & MarkerCluster** (Heatmaps & Clustering)
 
-## 📸 Screenshots
-### Global View
-<img src="screenshots/screenshot1.png" alt="Screenshot 1" width="400">
+## 📸 Global View
+<img src="screenshots/screenshot1.png" alt="Screenshot 1" width="300">
 
 
 
