@@ -9,6 +9,8 @@ A real-time web app that tracks and visualizes global weather balloons using **L
 - **Weather Overlay**: Cloud coverage layer from OpenWeatherMap.
 - **Automatic Map Adjustment**: Ensures optimal zoom and centering based on balloon distribution.
 
+Check out the live deployment: https://skysight-m86u.onrender.com/ — already hosted on Render!
+
 ## 🔧 Setup
 ### 1. Clone the Repository
 ```bash
@@ -27,17 +29,6 @@ python app.py
 ```
 By default, the Flask app runs on `http://127.0.0.1:5000/`.
 
-## 📂 File Structure
-```
-📦 balloon-flight-visualizer
-├── 📜 app.py            # Flask backend
-├── 📜 Procfile          # Deployment config
-├── 📜 requirements.txt  # Python dependencies
-├── 📜 index.html        # Frontend UI
-├── 📜 script.js         # Map visualization logic
-├── 📜 style.css         # UI Styling
-└── 📂 static            # Static assets (CSS, JS, etc.)
-```
 
 ## 🌍 Live Data Source
 Balloon data is fetched from `https://a.windbornesystems.com/treasure/`. The API retrieves snapshots from the last 24 hours, identifying and grouping balloons based on proximity.
@@ -55,11 +46,7 @@ Balloon data is fetched from `https://a.windbornesystems.com/treasure/`. The API
 ### Global View
 ![Screenshot 2](screenshot2.png)
 
-## 🌐 Deployment
-For deployment on **Heroku**, add the `Procfile` and run:
-```bash
-git push heroku main
-```
+
 
 ## 🤝 Contributing
 Got ideas? Found a bug? Feel free to fork this repo and submit a pull request!
