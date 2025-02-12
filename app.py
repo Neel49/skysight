@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, send_from_directory
 import requests
 import json
-import math  # For math.isnan and sqrt
+import math
 
 app = Flask(__name__, static_folder='static')
 
@@ -38,7 +38,7 @@ def is_valid_balloon_record(record):
     if isinstance(record, dict):
         if 'lat' not in record or 'lon' not in record:
             return False
-        # We'll check for NaN later during processing.
+
         return True
     elif isinstance(record, list):
         return len(record) >= 2
@@ -68,11 +68,11 @@ def balloon_history():
     and then group records from different snapshots together if they appear to be the same balloon.
     """
     base_url = "https://a.windbornesystems.com/treasure/"
-    aggregated_data = {}  # Keys: balloon IDs; Values: lists of records.
-    balloon_counter = 0  # Used to generate new balloon IDs
+    aggregated_data = {}
+    balloon_counter = 0
 
-    # Loop over 24 snapshots (0 = current, 23 = 23 hours ago)
-    for i in range(10):
+
+    for i in range(5):
         file_name = f"{i:02d}.json"
         url = base_url + file_name
         print(f"\n=== Processing snapshot {i} from URL: {url} ===")
@@ -86,7 +86,7 @@ def balloon_history():
                 print(f"Successfully parsed JSON for snapshot {i}.")
             except ValueError as e:
                 print(f"Error parsing JSON from {url}: {e}")
-                # Attempt to salvage valid JSON by trimming extra data
+
                 text = response.text.strip()
                 last_bracket = text.rfind(']')
                 if last_bracket != -1:
@@ -111,12 +111,12 @@ def balloon_history():
                     print(f"Warning: Invalid record in {file_name}, index {idx}: {record}")
                     continue
 
-                # Process records provided as a list.
+
                 if isinstance(record, list):
                     temp_id = f"temp_{i}_{idx}"
                     lat = process_coordinate(record[0])
                     lon = process_coordinate(record[1])
-                    # Skip the record if coordinates are invalid.
+
                     if lat is None or lon is None:
                         print(f"Skipping record in {file_name}, index {idx} due to invalid coordinates.")
                         continue
@@ -129,9 +129,9 @@ def balloon_history():
                     if len(record) > 2:
                         new_record['alt'] = process_altitude(record[2])
                     record = new_record
-                    #print(f"Converted list record at index {idx} in snapshot {i} to dict with temp id {temp_id}.")
+
                 else:
-                    # For dict records, process lat/lon.
+
                     lat = process_coordinate(record['lat'])
                     lon = process_coordinate(record['lon'])
                     if lat is None or lon is None:
@@ -143,27 +143,27 @@ def balloon_history():
                     if 'alt' in record:
                         record['alt'] = process_altitude(record['alt'])
 
-                # Merge with an existing balloon group if the record is close enough.
+
                 merged = False
                 for balloon_id, history in aggregated_data.items():
                     if are_same_balloon(history[-1], record, threshold=1.0):
                         history.append(record)
-                        #print(f"Merged record from snapshot {i}, index {idx} into balloon {balloon_id}.")
+
                         merged = True
                         break
 
                 if not merged:
-                    # Create a new balloon group.
+
                     new_balloon_id = f"balloon_{balloon_counter}"
                     balloon_counter += 1
                     aggregated_data[new_balloon_id] = [record]
-                    #print(f"Created new balloon group {new_balloon_id} with record from snapshot {i}, index {idx}.")
+
 
         except Exception as e:
             print(f"Error fetching or processing {url}: {e}")
             continue
 
-    # Prepare final aggregated list.
+
     balloons_list = []
     for balloon_id, history in aggregated_data.items():
         history.sort(key=lambda r: r['hours_ago'])
