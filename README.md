@@ -40,11 +40,8 @@ Balloon data is fetched from `https://a.windbornesystems.com/treasure/`. The API
 - **Leaflet.heat & MarkerCluster** (Heatmaps & Clustering)
 
 ## 📸 Screenshots
-### Marker Clusters & Flight Paths
-![Screenshot 1](screenshot1.png)
-
 ### Global View
-![Screenshot 2](screenshot2.png)
+![Screenshot 2](screenshots/screenshot1.png)
 
 
 
