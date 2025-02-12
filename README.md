@@ -41,7 +41,7 @@ Balloon data is fetched from `https://a.windbornesystems.com/treasure/`. The API
 
 ## 📸 Screenshots
 ### Global View
-<img src="screenshots/screenshot1.png" alt="Screenshot 2" width="600">
+<img src="screenshots/screenshot1.png" alt="Screenshot 1" width="400">
 
 
 
