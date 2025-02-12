@@ -9,7 +9,7 @@ A real-time web app that tracks and visualizes global weather balloons using **L
 - **Weather Overlay**: Cloud coverage layer from OpenWeatherMap.
 - **Automatic Map Adjustment**: Ensures optimal zoom and centering based on balloon distribution.
 
-Check out the live deployment: https://skysight-m86u.onrender.com/ — already hosted on Render!
+Check out the live deployment: https://skysight-m86u.onrender.com/ — already hosted on Render! It takes a few seconds each time you reload to fetch new data.
 
 ## 🔧 Setup
 ### 1. Clone the Repository
