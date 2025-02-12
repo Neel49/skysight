@@ -30,8 +30,6 @@ def process_altitude(value):
 
 def is_valid_balloon_record(record):
     """
-    Accept either a dict record or a list record.
-    
     - For a dict, it must have 'lat' and 'lon' keys.
     - For a list, it must have at least two values.
     """
@@ -46,8 +44,7 @@ def is_valid_balloon_record(record):
 
 def are_same_balloon(rec1, rec2, threshold=1.0):
     """
-    Determine if two balloon records are from the same balloon based on proximity.
-    Uses a simple Euclidean distance on lat/lon (in degrees). Adjust the threshold as needed.
+    Figure out if two balloon records are from the same balloon based on prox.
     """
     try:
         lat1 = rec1['lat']
@@ -63,8 +60,8 @@ def are_same_balloon(rec1, rec2, threshold=1.0):
 def balloon_history():
     """
     Aggregates the flight history from the last 24 hours.
-    Each JSON file (00.json through 23.json) represents a snapshot taken N hours ago.
-    We fetch each file, validate the data (supporting both dict and list formats),
+    Each JSON file (00.json through 23.json) is snapshot taken N hours ago.
+    We fetch each file, validate data,
     and then group records from different snapshots together if they appear to be the same balloon.
     """
     base_url = "https://a.windbornesystems.com/treasure/"
